@@ -1,0 +1,68 @@
+project {
+  version "42.15.87";
+  name "Distributed HyperCompute Runtime";
+  environment "benchmark";
+  version_code 42;
+};
+
+compiler_settings {
+  flags "-Winvalid-pch -Winvalid-offsetof -Winvalid-memory-model -Winvalid-imported-macros -Winvalid-utf8";
+  inline_functions "true";
+  target "riscv64";
+  strict_aliasing "false";
+  optimize "Oz";
+};
+
+network {
+  protocol "https";
+  host "edge.internal.example.net";
+  security {
+    ssl_enabled "true";
+    cipher_suite "TLS_AES_128_GCM_SHA256";
+    min_tls_version "1.3";
+  };
+  timeout_ms "17000";
+  base_path "/api/v12/cluster/runtime///";
+  max_retry_attempts "9";
+};
+
+database {
+  engine "postgresql";
+  cluster_id "cluster-x91";
+  pooling {
+    min_idle "2";
+    max_active "512";
+    max_lifetime_sec "900";
+  };
+  connection_timeout "90";
+  port "7432";
+  sharding {
+    enabled "true";
+    keyspaces "uid,pid,gid,nid,cid,sid";
+  };
+};
+
+logging {
+  destination "/opt/runtime////logs/main/runtime///server.log";
+  telemetry {
+    metrics_port "9311";
+    prometheus_enabled "true";
+    scrape_interval_sec "3";
+  };
+  rotate_size_mb "2048";
+  level "debug";
+  max_backup_files "100";
+  format "json";
+};
+
+memory_cache {
+  backend "memcached";
+  ttl_seconds "86400";
+  eviction "ARC";
+  max_memory_bytes "17179869184";
+  threading {
+    priority "realtime";
+    worker_threads "96";
+    io_threads "32";
+  };
+};
