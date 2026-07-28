@@ -162,13 +162,19 @@ void print_help() {
             << colors::sky << "Commands\n"
             << colors::reset << "    " << std::left << std::setw(16)
             << (std::string(colors::mauve) + "compile") << colors::subtext0
-            << " Compile a target .qc input file\n"
+            << " Compile a target .qcf input file\n"
             << "    " << std::left << std::setw(16)
             << (std::string(colors::mauve) + "decompile") << colors::subtext0
             << " Decompile a compiled asset file\n"
             << "    " << std::left << std::setw(16)
             << (std::string(colors::mauve) + "fmt") << colors::subtext0
-            << " Format file or directory of .qc assets\n"
+            << " Format file or directory of .qcf assets\n"
+            << "    " << std::left << std::setw(16)
+            << (std::string(colors::mauve) + "export") << colors::subtext0
+            << " Export a target .qcf input file. Options json/toml\n"
+            << "    " << std::left << std::setw(16)
+            << (std::string(colors::mauve) + "decompile") << colors::subtext0
+            << " Decompile a compiled asset file\n"
             << "    " << std::left << std::setw(16)
             << (std::string(colors::mauve) + "version") << colors::subtext0
             << " Display compiler application version\n"
@@ -179,6 +185,12 @@ void print_help() {
             << colors::reset << "    " << std::left << std::setw(16)
             << (std::string(colors::peach) + "-C, --compile")
             << colors::subtext0 << " Alias for compile command\n"
+            << "    " << std::left << std::setw(16)
+            << (std::string(colors::peach) + "--decompile") << colors::subtext0
+            << " Alias for decompile command\n"
+            << "    " << std::left << std::setw(16)
+            << (std::string(colors::peach) + "--export") << colors::subtext0
+            << " Alias for export command\n"
             << "    " << std::left << std::setw(16)
             << (std::string(colors::peach) + "-V, --version")
             << colors::subtext0 << " Alias for version command\n"
@@ -380,7 +392,7 @@ int decompile_command(const fs::path &filepath) {
     }
 
     fs::path out_path = filepath;
-    out_path.replace_extension(".qc");
+    out_path.replace_extension(".qcf");
 
     if (!write_file(out_path, libqcc::format(decompiled.result))) {
       print_error("Failed to write decompiled source file", out_path.string(),
@@ -461,7 +473,7 @@ int format_directory(const fs::path &dirpath) {
 
   try {
     for (const auto &entry : fs::directory_iterator(dirpath)) {
-      if (entry.is_regular_file() && entry.path().extension() == ".qc") {
+      if (entry.is_regular_file() && entry.path().extension() == ".qcf") {
         int status = format_file(entry.path(), false);
         if (status == 0) {
           std::cout << colors::green << symbols::check << colors::text << " "
@@ -525,7 +537,7 @@ int main(int argc, char *argv[]) {
   if (cmd == "compile" || cmd == "-C" || cmd == "--compile") {
     if (args.size() < 2) {
       print_error("Missing target file for compilation", "",
-                  "qccc compile <file.qc>");
+                  "qccc compile <file.qcf>");
       return 1;
     }
     return compile_command(args[1]);
@@ -557,6 +569,48 @@ int main(int argc, char *argv[]) {
     print_error("Invalid arguments for format command", "",
                 "qccc fmt <path> [options]");
     return 1;
+  }
+
+  if (cmd == "export" || cmd == "--export") {
+    if (args.size() != 3) {
+      print_error("Invalid argument length for export command.", "",
+                  "qcc export <option> <filepath>");
+      return 1;
+    }
+
+    auto opt = args[1];
+    auto filepath = args[2];
+
+    auto code = read_file(filepath);
+
+    if (!code.success) {
+      print_error("Cannot read target file.", code.content_or_error);
+      return 1;
+    }
+
+    try {
+      auto compiled = libqcc::deep_compile(code.content_or_error);
+      auto serialized = libqcc::serializer::serialize(compiled);
+
+      if (opt == "json") {
+        std::cout << libqcc::serializer::export_to_json(serialized);
+        return 0;
+      } else if (opt == "toml") {
+        std::cout << libqcc::serializer::export_to_toml(serialized);
+        return 0;
+      } else {
+        print_error("Invalid option selected.", "",
+                    "Available 'json' and 'toml'.");
+        return 1;
+      }
+    } catch (const libqcc::errors::compile_time_error &err) {
+      render_compile_error(make_diagnostic(err), code.content_or_error,
+                           filepath);
+      return 1;
+    } catch (...) {
+      print_error("Internal compiler error", "", "");
+      return 1;
+    }
   }
 
   print_error("Unknown command", std::string(cmd), "qccc --help");
