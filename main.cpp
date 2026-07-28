@@ -53,7 +53,7 @@ constexpr std::string_view arrow = "→";
 
 namespace meta {
 constexpr std::string_view app_name = "QuickConfigCompilerCLI";
-constexpr std::string_view version = "26.1.1";
+constexpr std::string_view version = "26.2.1";
 constexpr std::string_view library = "libqcc";
 constexpr std::string_view language = "QuickConfig";
 } // namespace meta
