@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QCCC CLI Documentation</title>
+    <meta
+      name="description"
+      content="Documentation for the QCCC command-line compiler for QuickConfig projects."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="background-glow glow-one"></div>
+    <div class="background-glow glow-two"></div>
+
+    <header class="site-header">
+      <a class="brand" href="#top">
+        <span class="brand-mark">Q</span>
+        <span>QCCC CLI Docs</span>
+      </a>
+      <button
+        class="nav-toggle"
+        aria-label="Toggle navigation"
+        aria-expanded="false"
+      >
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="site-nav">
+        <a href="#overview">Overview</a>
+        <a href="#commands">Commands</a>
+        <a href="#workflow">Workflow</a>
+        <a href="#examples">Examples</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero reveal">
+        <div class="hero-copy">
+          <p class="eyebrow">Compiler reference</p>
+          <h1>
+            Build, inspect, and format QuickConfig assets from the terminal.
+          </h1>
+          <p class="hero-text">
+            QCCC is the command-line interface for QuickConfig. It compiles
+            source files, decompiles binaries, formats projects, and reports
+            diagnostics with clarity.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#commands">View commands</a>
+            <a class="button secondary" href="#examples">See examples</a>
+          </div>
+        </div>
+        <div class="hero-card">
+          <pre><code>qccc compile app.qc
+qccc decompile app.qbin
+qccc fmt ./configs
+qccc version</code></pre>
+        </div>
+      </section>
+
+      <section id="overview" class="panel reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Overview</p>
+          <h2>What QCCC helps you do</h2>
+        </div>
+        <div class="card-grid">
+          <article class="card">
+            <h3>Compile sources</h3>
+            <p>
+              Turn QuickConfig source files into compact binary assets ready for
+              loading or distribution.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Decompile binaries</h3>
+            <p>
+              Recover source-like output from compiled data so you can inspect
+              or debug existing assets.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Format projects</h3>
+            <p>
+              Normalize one file or an entire folder of QuickConfig documents
+              with a single command.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="commands" class="panel reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Commands</p>
+          <h2>Core CLI actions</h2>
+        </div>
+        <div class="split-layout">
+          <div class="content-stack">
+            <article class="info-card">
+              <h3>compile</h3>
+              <p>Compile a target .qc file into a .qbin binary asset.</p>
+              <pre><code>qccc compile app.qc</code></pre>
+            </article>
+            <article class="info-card">
+              <h3>decompile</h3>
+              <p>
+                Reconstruct source-style output from a compiled QuickConfig
+                binary.
+              </p>
+              <pre><code>qccc decompile app.qbin</code></pre>
+            </article>
+          </div>
+          <div class="content-stack">
+            <article class="info-card">
+              <h3>fmt</h3>
+              <p>Format a file or directory of .qc assets in place.</p>
+              <pre><code>qccc fmt ./configs</code></pre>
+            </article>
+            <article class="info-card">
+              <h3>version and help</h3>
+              <p>Inspect the build version or print the command reference.</p>
+              <pre><code>qccc version
+qccc help</code></pre>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="workflow" class="panel reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Workflow</p>
+          <h2>A practical development loop</h2>
+        </div>
+        <div class="rules-list">
+          <div class="rule-item">
+            <span>01</span>
+            <div>
+              <h3>Author your source</h3>
+              <p>
+                Create or update a QuickConfig document with the expected .qc
+                syntax.
+              </p>
+            </div>
+          </div>
+          <div class="rule-item">
+            <span>02</span>
+            <div>
+              <h3>Compile and inspect</h3>
+              <p>
+                Use the compiler to produce a binary asset and review any
+                diagnostics.
+              </p>
+            </div>
+          </div>
+          <div class="rule-item">
+            <span>03</span>
+            <div>
+              <h3>Format consistently</h3>
+              <p>
+                Run the formatter over your project to keep files readable and
+                consistent.
+              </p>
+            </div>
+          </div>
+          <div class="rule-item">
+            <span>04</span>
+            <div>
+              <h3>Decompile when needed</h3>
+              <p>
+                Recover source-like output from binaries when you need to
+                inspect existing assets.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="examples" class="panel reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Examples</p>
+          <h2>Typical command sequences</h2>
+        </div>
+        <div class="example-grid">
+          <article class="example-card">
+            <h3>Single-file round trip</h3>
+            <pre><code>qccc compile config.qc
+qccc decompile config.qbin</code></pre>
+            <p>
+              Use this when you want to verify that the compiler and decompiler
+              agree.
+            </p>
+          </article>
+          <article class="example-card">
+            <h3>Format an entire project</h3>
+            <pre><code>qccc fmt ./src</code></pre>
+            <p>
+              Apply formatting across a directory without touching unrelated
+              files.
+            </p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>QCCC CLI Documentation</p>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
