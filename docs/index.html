@@ -58,7 +58,7 @@
           </div>
         </div>
         <div class="hero-card">
-          <pre><code>qccc compile app.qc
+          <pre><code>qccc compile app.qcf
 qccc decompile app.qbin
 qccc fmt ./configs
 qccc version</code></pre>
@@ -104,8 +104,8 @@ qccc version</code></pre>
           <div class="content-stack">
             <article class="info-card">
               <h3>compile</h3>
-              <p>Compile a target .qc file into a .qbin binary asset.</p>
-              <pre><code>qccc compile app.qc</code></pre>
+              <p>Compile a target .qcf file into a .qbin binary asset.</p>
+              <pre><code>qccc compile app.qcf</code></pre>
             </article>
             <article class="info-card">
               <h3>decompile</h3>
@@ -119,7 +119,7 @@ qccc version</code></pre>
           <div class="content-stack">
             <article class="info-card">
               <h3>fmt</h3>
-              <p>Format a file or directory of .qc assets in place.</p>
+              <p>Format a file or directory of .qcf assets in place.</p>
               <pre><code>qccc fmt ./configs</code></pre>
             </article>
             <article class="info-card">
@@ -143,7 +143,7 @@ qccc help</code></pre>
             <div>
               <h3>Author your source</h3>
               <p>
-                Create or update a QuickConfig document with the expected .qc
+                Create or update a QuickConfig document with the expected .qcf
                 syntax.
               </p>
             </div>
@@ -189,7 +189,7 @@ qccc help</code></pre>
         <div class="example-grid">
           <article class="example-card">
             <h3>Single-file round trip</h3>
-            <pre><code>qccc compile config.qc
+            <pre><code>qccc compile config.qcf
 qccc decompile config.qbin</code></pre>
             <p>
               Use this when you want to verify that the compiler and decompiler
@@ -203,6 +203,11 @@ qccc decompile config.qbin</code></pre>
               Apply formatting across a directory without touching unrelated
               files.
             </p>
+          </article>
+          <article class="example-card">
+            <h3>Export a file</h3>
+            <pre><code>qccc export json file.qcf > file.json</code></pre>
+            <p>Convert the qcf to json. (TOML also supported.)</p>
           </article>
         </div>
       </section>
