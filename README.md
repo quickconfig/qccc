@@ -26,7 +26,7 @@ qccc help
 
 See the QCCC documentation:
 
-Open [docs/index.html](docs/index.html) in a browser to view the documentation site.
+Open [docs/index.html](docs/index.html) in a browser to view the [documentation site](https://quickconfig.github.io/qccc).
 
 ## Build
 

@@ -3,220 +3,163 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>QCCC CLI Documentation</title>
+    <title>QCCC Documentation</title>
     <meta
       name="description"
-      content="Documentation for the QCCC command-line compiler for QuickConfig projects."
+      content="A precise, developer-focused reference for the QCCC command-line compiler."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body>
-    <div class="background-glow glow-one"></div>
-    <div class="background-glow glow-two"></div>
+  <body class="page-qccc">
+    <a class="skip-link" href="#content">Skip to content</a>
+    <div class="site-shell">
+      <header class="site-header">
+        <a class="brand" href="#top" aria-label="QCCC home">[ qccc ]</a>
+        <button
+          class="nav-toggle"
+          aria-label="Toggle navigation"
+          aria-expanded="false"
+        >
+          menu
+        </button>
+        <nav class="site-nav" aria-label="Primary navigation">
+          <a href="#overview">overview</a>
+          <a href="#commands">commands</a>
+          <a href="#workflow">workflow</a>
+          <a href="#examples">examples</a>
+        </nav>
+      </header>
 
-    <header class="site-header">
-      <a class="brand" href="#top">
-        <span class="brand-mark">Q</span>
-        <span>QCCC CLI Docs</span>
-      </a>
-      <button
-        class="nav-toggle"
-        aria-label="Toggle navigation"
-        aria-expanded="false"
-      >
-        <span></span><span></span><span></span>
-      </button>
-      <nav class="site-nav">
-        <a href="#overview">Overview</a>
-        <a href="#commands">Commands</a>
-        <a href="#workflow">Workflow</a>
-        <a href="#examples">Examples</a>
-      </nav>
-    </header>
-
-    <main id="top">
-      <section class="hero reveal">
-        <div class="hero-copy">
-          <p class="eyebrow">Compiler reference</p>
-          <h1>
-            Build, inspect, and format QuickConfig assets from the terminal.
-          </h1>
-          <p class="hero-text">
-            QCCC is the command-line interface for QuickConfig. It compiles
-            source files, decompiles binaries, formats projects, and reports
-            diagnostics with clarity.
-          </p>
-          <div class="hero-actions">
-            <a class="button primary" href="#commands">View commands</a>
-            <a class="button secondary" href="#examples">See examples</a>
+      <main id="content">
+        <section class="hero reveal" id="top">
+          <div class="hero-copy">
+            <p class="eyebrow">compiler reference</p>
+            <h1>
+              Build, inspect, and format QuickConfig assets directly from the
+              terminal.
+            </h1>
+            <p class="hero-text">
+              QCCC provides a direct path from source to binary and back again
+              while keeping command output concise and legible.
+            </p>
+            <div class="hero-actions">
+              <a class="button primary" href="#commands">view commands</a>
+              <a class="button secondary" href="#examples">see examples</a>
+            </div>
           </div>
-        </div>
-        <div class="hero-card">
-          <pre><code>qccc compile app.qcf
+          <div class="hero-panel" aria-label="QCCC example commands">
+            <pre><code>qccc compile app.qcf
 qccc decompile app.qbin
 qccc fmt ./configs
 qccc version</code></pre>
-        </div>
-      </section>
+          </div>
+        </section>
 
-      <section id="overview" class="panel reveal">
-        <div class="section-heading">
-          <p class="eyebrow">Overview</p>
-          <h2>What QCCC helps you do</h2>
-        </div>
-        <div class="card-grid">
-          <article class="card">
-            <h3>Compile sources</h3>
-            <p>
-              Turn QuickConfig source files into compact binary assets ready for
-              loading or distribution.
-            </p>
-          </article>
-          <article class="card">
-            <h3>Decompile binaries</h3>
-            <p>
-              Recover source-like output from compiled data so you can inspect
-              or debug existing assets.
-            </p>
-          </article>
-          <article class="card">
-            <h3>Format projects</h3>
-            <p>
-              Normalize one file or an entire folder of QuickConfig documents
-              with a single command.
-            </p>
-          </article>
-        </div>
-      </section>
-
-      <section id="commands" class="panel reveal">
-        <div class="section-heading">
-          <p class="eyebrow">Commands</p>
-          <h2>Core CLI actions</h2>
-        </div>
-        <div class="split-layout">
-          <div class="content-stack">
-            <article class="info-card">
+        <section id="overview" class="panel reveal">
+          <div class="section-heading">
+            <p class="eyebrow">overview</p>
+            <h2>Focused on practical compiler workflows.</h2>
+          </div>
+          <div class="card-grid">
+            <article class="card">
               <h3>compile</h3>
-              <p>Compile a target .qcf file into a .qbin binary asset.</p>
+              <p>Turn a .qcf file into a compact binary asset.</p>
+            </article>
+            <article class="card">
+              <h3>decompile</h3>
+              <p>Recover readable source-like output from existing binaries.</p>
+            </article>
+            <article class="card">
+              <h3>format</h3>
+              <p>Normalize files and folders with a consistent formatter.</p>
+            </article>
+          </div>
+        </section>
+
+        <section id="commands" class="panel reveal">
+          <div class="section-heading">
+            <p class="eyebrow">commands</p>
+            <h2>Core actions in a compact surface.</h2>
+          </div>
+          <div class="split-grid">
+            <article class="code-card">
+              <h3>compile</h3>
               <pre><code>qccc compile app.qcf</code></pre>
             </article>
-            <article class="info-card">
+            <article class="code-card">
               <h3>decompile</h3>
-              <p>
-                Reconstruct source-style output from a compiled QuickConfig
-                binary.
-              </p>
               <pre><code>qccc decompile app.qbin</code></pre>
             </article>
-          </div>
-          <div class="content-stack">
-            <article class="info-card">
+            <article class="code-card">
               <h3>fmt</h3>
-              <p>Format a file or directory of .qcf assets in place.</p>
               <pre><code>qccc fmt ./configs</code></pre>
             </article>
-            <article class="info-card">
-              <h3>version and help</h3>
-              <p>Inspect the build version or print the command reference.</p>
-              <pre><code>qccc version
-qccc help</code></pre>
+            <article class="code-card">
+              <h3>export</h3>
+              <pre><code>qccc export json file.qcf</code></pre>
             </article>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section id="workflow" class="panel reveal">
-        <div class="section-heading">
-          <p class="eyebrow">Workflow</p>
-          <h2>A practical development loop</h2>
-        </div>
-        <div class="rules-list">
-          <div class="rule-item">
-            <span>01</span>
-            <div>
-              <h3>Author your source</h3>
-              <p>
-                Create or update a QuickConfig document with the expected .qcf
-                syntax.
-              </p>
-            </div>
+        <section id="workflow" class="panel reveal">
+          <div class="section-heading">
+            <p class="eyebrow">workflow</p>
+            <h2>A simple loop from source to output.</h2>
           </div>
-          <div class="rule-item">
-            <span>02</span>
-            <div>
-              <h3>Compile and inspect</h3>
-              <p>
-                Use the compiler to produce a binary asset and review any
-                diagnostics.
-              </p>
-            </div>
+          <div class="list-stack">
+            <article class="list-item">
+              <span>01</span>
+              <div>
+                <h3>write source</h3>
+                <p>Start from a .qcf document in the expected syntax.</p>
+              </div>
+            </article>
+            <article class="list-item">
+              <span>02</span>
+              <div>
+                <h3>compile</h3>
+                <p>Generate the binary artifact and inspect diagnostics.</p>
+              </div>
+            </article>
+            <article class="list-item">
+              <span>03</span>
+              <div>
+                <h3>format</h3>
+                <p>Keep the project legible and consistent.</p>
+              </div>
+            </article>
           </div>
-          <div class="rule-item">
-            <span>03</span>
-            <div>
-              <h3>Format consistently</h3>
-              <p>
-                Run the formatter over your project to keep files readable and
-                consistent.
-              </p>
-            </div>
-          </div>
-          <div class="rule-item">
-            <span>04</span>
-            <div>
-              <h3>Decompile when needed</h3>
-              <p>
-                Recover source-like output from binaries when you need to
-                inspect existing assets.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+        </section>
 
-      <section id="examples" class="panel reveal">
-        <div class="section-heading">
-          <p class="eyebrow">Examples</p>
-          <h2>Typical command sequences</h2>
-        </div>
-        <div class="example-grid">
-          <article class="example-card">
-            <h3>Single-file round trip</h3>
-            <pre><code>qccc compile config.qcf
+        <section id="examples" class="panel reveal">
+          <div class="section-heading">
+            <p class="eyebrow">examples</p>
+            <h2>Common commands, clearly structured.</h2>
+          </div>
+          <div class="card-grid">
+            <article class="card">
+              <h3>round trip</h3>
+              <pre><code>qccc compile config.qcf
 qccc decompile config.qbin</code></pre>
-            <p>
-              Use this when you want to verify that the compiler and decompiler
-              agree.
-            </p>
-          </article>
-          <article class="example-card">
-            <h3>Format an entire project</h3>
-            <pre><code>qccc fmt ./src</code></pre>
-            <p>
-              Apply formatting across a directory without touching unrelated
-              files.
-            </p>
-          </article>
-          <article class="example-card">
-            <h3>Export a file</h3>
-            <pre><code>qccc export json file.qcf > file.json</code></pre>
-            <p>Convert the qcf to json. (TOML also supported.)</p>
-          </article>
-        </div>
-      </section>
-    </main>
+            </article>
+            <article class="card">
+              <h3>format a directory</h3>
+              <pre><code>qccc fmt ./src</code></pre>
+            </article>
+          </div>
+        </section>
+      </main>
 
-    <footer class="site-footer">
-      <p>QCCC CLI Documentation</p>
-    </footer>
-
+      <footer class="site-footer">
+        <p>qccc / documentation</p>
+      </footer>
+    </div>
     <script src="app.js"></script>
   </body>
 </html>
